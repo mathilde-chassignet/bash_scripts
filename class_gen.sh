@@ -4,7 +4,7 @@ then
 	echo "class: Please provide a name for your class";
 	exit 1;
 fi
-path="/mnt/c/Users/Mathilde/Documents/Cours/42/bash_script/"
+path="/mnt/nfs/homes/mchassig/Documents/bash_scripts/"
 for class in $@
 do
 	bash "$path/cpp_gen.sh" $class;

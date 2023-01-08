@@ -14,17 +14,26 @@ do
 		touch $file
 		define_name=${file^^}
 		define_name=${define_name//./_}
-		echo "#ifndef $define_name" > $file;
-		echo "# define $define_name" >> $file;
-		echo -e "\n# include <iostream>" >> $file;
-		echo -e "\nclass $class\n{" >> $file;
-		echo -e "\tpublic:" >> $file;
-		echo -e "\t\t$class(void);" >> $file;
-		echo -e "\t\t$class(/* args */);" >> $file;
-		echo -e "\t\t$class($class const &src);" >> $file;
-		echo -e "\t\t~$class(void);" >> $file;
-		echo -e "\n\tprivate:" >> $file;
-		echo -e "\n};" >> $file;
-		echo -e "\n#endif" >> $file;
+
+		echo -e "#ifndef $define_name
+# define $define_name
+
+# include <iostream>
+
+class $class
+{
+	public:
+		$class(void);
+		$class(/* args */);
+		$class($class const &src);
+		$class&	operator=($class const &src);
+		~$class(void);
+
+	private:
+
+};
+
+#endif" > $file;
+
 	fi
 done

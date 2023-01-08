@@ -12,10 +12,41 @@ do
 		echo "cpp: The file $file already exists!";
 	else
 		touch $file;
-		echo "#include \"$1.hpp\"" > $file;
-		echo -e "\n$1::$1(void)\n{\n\treturn ;\n}" >> $file;
-		echo -e "\n$1::$1(/* args */)\n{\n\treturn ;\n}" >> $file;
-		echo -e "\n$1::$1($1 const &src)\n{\n\t*this = src;\n}" >> $file;
-		echo -e "\n$1::~$1(void)\n{\n\treturn ;\n}" >> $file;
+		
+		echo -e "#include \"$class.hpp\"
+
+$class::$class(void)
+{
+	std::cout << \"$class: Default constructor called\" << std::endl;
+	return ;
+}
+
+$class::$class(/* args */)
+{
+	std::cout << \"$class: Parametric constructor called\" << std::endl;
+	return ;
+}
+
+$class::$class($class const &src)
+{
+	std::cout << \"$class: Copy constructor called\" << std::endl;
+	*this = src;
+}
+
+$class&	$class::operator=($class const &src)
+{
+	std::cout << \"$class: Copy assignement operator called\" << std::endl;
+	if (this != &src)
+	{
+	}
+	return (*this);
+}
+
+$class::~$class(void)
+{
+	std::cout << \"$class: Destructor called\" << std::endl;
+	return ;
+}" > $file;
+
 	fi
 done
